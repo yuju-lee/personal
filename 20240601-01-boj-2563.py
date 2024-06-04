@@ -1,35 +1,18 @@
-from collections import Counter
-
 cnt = int(input())
-area = 100*100
 
-barea = cnt*100
+# 100*100 배열 만들기
+white = [[0 for x in range(101)]for y in range(101)]
+blackcount = 0
 
-def setMatrix (n):
-    ls = []
-    for i in range(11):
-        ls.append(n+i)
-    return ls
-
-sumw = []
-sumh = []
+#가로 세로 10칸씩 숫자 올리기
+#중복 생각하지 않고 그냥 무조건 칠한 곳은 1로 생각하면 되는거엿음... 하...
 for i in range(cnt):
     w, h = map(int, input().split())
-    lsw = setMatrix(w)
-    sumw.append(lsw)
-    lsh = setMatrix(h)
-    sumh.append(lsh)
+    for j in range(0, 10):
+        for k in range(0, 10):
+            white[j+w][k+h] = 1
 
+for i in range(0,101):
+    blackcount += white[i].count(1)
 
-print(sumw)
-print(sumh)
-
-
-# 모든 값을 하나의 리스트에 모으기
-all_values = [value for sublist in sumw for value in sublist]
-
-# 중복된 값을 찾아내기
-count = Counter(all_values)
-duplicates = [item for item, freq in count.items() if freq > 1]
-
-print(duplicates)
+print(blackcount)
